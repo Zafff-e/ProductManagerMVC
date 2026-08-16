@@ -1,27 +1,29 @@
-<!DOCTYPE html><html lang="en"><head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ASP.NET Core MVC CRUD — Product Manager</title>
 
   <!-- Social Meta -->
-  <meta property="og:title" content="ASP.NET Core MVC CRUD — Product Manager"/>
-  <meta property="og:description" content="A complete ASP.NET Core MVC CRUD application scaffold with Repository pattern, EF Core, and Bootstrap views for the Product entity."/>
-  <meta property="og:url" content="https://www.onspace.ai"/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:site_name" content="OnSpace.AI"/>
-  <meta property="og:image" content="https://cdn-ai.onspace.ai/onspace/project/screenshot/online/pre-site/9bjduk.jpg"/>
-  <meta property="og:image:width" content="1200"/>
-  <meta property="og:image:height" content="630"/>
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="ASP.NET Core MVC CRUD — Product Manager"/>
-  <meta name="twitter:description" content="A complete ASP.NET Core MVC CRUD application scaffold with Repository pattern, EF Core, and Bootstrap views."/>
-  <meta name="twitter:image" content="https://cdn-ai.onspace.ai/onspace/project/screenshot/online/pre-site/9bjduk.jpg"/>
-  <meta name="twitter:url" content="https://www.onspace.ai"/>
+  <meta property="og:title" content="ASP.NET Core MVC CRUD — Product Manager" />
+  <meta property="og:description" content="A complete ASP.NET Core MVC CRUD application scaffold with Repository pattern, EF Core, and Bootstrap views for the Product entity." />
+  <meta property="og:url" content="https://www.onspace.ai" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="OnSpace.AI" />
+  <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=ASP.NET+Core+MVC+CRUD" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ASP.NET Core MVC CRUD — Product Manager" />
+  <meta name="twitter:description" content="A complete ASP.NET Core MVC CRUD application scaffold with Repository pattern, EF Core, and Bootstrap views." />
+  <meta name="twitter:image" content="https://via.placeholder.com/1200x630.png?text=ASP.NET+Core+MVC+CRUD" />
+  <meta name="twitter:url" content="https://www.onspace.ai" />
 
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <script>
     tailwind.config = {
@@ -31,93 +33,408 @@
             sans: ['Inter', 'sans-serif'],
             mono: ['JetBrains Mono', 'monospace'],
           },
-          colors: {
-            surface: {
-              950: '#0a0a0f',
-              900: '#0f0f1a',
-              800: '#161625',
-              700: '#1e1e32',
-              600: '#252540',
-            },
-            accent: {
-              500: '#6366f1',
-              400: '#818cf8',
-              300: '#a5b4fc',
-            },
-            muted: '#6b7280',
-            border: '#1f1f35',
-          },
         },
       },
     };
   </script>
 
   <style>
-    body { background-color: #0a0a0f; color: #e2e8f0; }
-    .glow { box-shadow: 0 0 40px rgba(99,102,241,0.12); }
-    .glow-sm { box-shadow: 0 0 20px rgba(99,102,241,0.08); }
-    /* Scrollbar */
+    /* ══════════════════════════════════════════
+       CSS CUSTOM PROPERTIES — THEME SYSTEM
+    ══════════════════════════════════════════ */
+    :root,
+    [data-theme="dark"] {
+      --bg-base:        #0a0a0f;
+      --bg-surface:     #0f0f1a;
+      --bg-elevated:    #161625;
+      --bg-card:        #0d0d1a;
+      --bg-input:       #161625;
+      --bg-hover:       #161625;
+      --bg-selected:    #1e1e32;
+      --bg-nav:         rgba(10,10,15,0.92);
+      --bg-code:        #0d0d1a;
+      --bg-table-head:  #0d0d1a;
+      --bg-demo-bar:    #0a0a0f;
+
+      --border:         #1f1f35;
+      --border-strong:  #252540;
+
+      --text-primary:   #e2e8f0;
+      --text-secondary: #94a3b8;
+      --text-muted:     #6b7280;
+      --text-white:     #ffffff;
+      --text-code:      #c9d1d9;
+
+      --accent-500:     #6366f1;
+      --accent-400:     #818cf8;
+      --accent-300:     #a5b4fc;
+
+      --badge-bg:       #12122a;
+      --badge-border:   #2a2a4a;
+
+      --kw-color:       #ff79c6;
+      --ty-color:       #8be9fd;
+      --st-color:       #f1fa8c;
+      --cm-color:       #6272a4;
+      --at-color:       #50fa7b;
+      --nu-color:       #bd93f9;
+      --fn-color:       #ffb86c;
+
+      --shadow-glow:    0 0 40px rgba(99,102,241,0.12);
+      --shadow-glow-sm: 0 0 20px rgba(99,102,241,0.08);
+      --shadow-toast:   0 8px 32px rgba(0,0,0,0.5);
+      --gradient-text-from: #818cf8;
+      --gradient-text-to:   #c4b5fd;
+
+      --scrollbar-track: #0f0f1a;
+      --scrollbar-thumb: #252540;
+
+      --arch-bg:        #0f0f1a;
+      --arch-icon-bg:   #1a1a2e;
+      --arch-icon-bd:   #252540;
+    }
+
+    [data-theme="light"] {
+      --bg-base:        #f4f5fb;
+      --bg-surface:     #ffffff;
+      --bg-elevated:    #f1f2f9;
+      --bg-card:        #f8f9ff;
+      --bg-input:       #f8f9ff;
+      --bg-hover:       #f1f2f9;
+      --bg-selected:    #e8eaf8;
+      --bg-nav:         rgba(255,255,255,0.92);
+      --bg-code:        #f4f5fb;
+      --bg-table-head:  #f1f2f9;
+      --bg-demo-bar:    #ecedf8;
+
+      --border:         #dde0f0;
+      --border-strong:  #c8cadf;
+
+      --text-primary:   #1e1f30;
+      --text-secondary: #4a4d6b;
+      --text-muted:     #7880a4;
+      --text-white:     #1e1f30;
+      --text-code:      #2e3050;
+
+      --accent-500:     #5254d0;
+      --accent-400:     #6366f1;
+      --accent-300:     #4649c7;
+
+      --badge-bg:       #ecedf8;
+      --badge-border:   #c8cadf;
+
+      --kw-color:       #b0006b;
+      --ty-color:       #007bb5;
+      --st-color:       #7a6000;
+      --cm-color:       #8090c0;
+      --at-color:       #1a7a3a;
+      --nu-color:       #7a3fbf;
+      --fn-color:       #c05000;
+
+      --shadow-glow:    0 0 40px rgba(99,102,241,0.08);
+      --shadow-glow-sm: 0 0 20px rgba(99,102,241,0.05);
+      --shadow-toast:   0 8px 32px rgba(0,0,0,0.15);
+      --gradient-text-from: #5254d0;
+      --gradient-text-to:   #8b5cf6;
+
+      --scrollbar-track: #f1f2f9;
+      --scrollbar-thumb: #c8cadf;
+
+      --arch-bg:        #ffffff;
+      --arch-icon-bg:   #ecedf8;
+      --arch-icon-bd:   #dde0f0;
+    }
+
+    /* ══ Base ══ */
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      transition: background-color 0.25s ease, color 0.25s ease;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+    }
+    * { transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease; }
+    /* Avoid over-transitioning */
+    button, a, input, select, textarea { transition: none; }
+
+    /* ══ Scrollbar ══ */
     ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #0f0f1a; }
-    ::-webkit-scrollbar-thumb { background: #252540; border-radius: 3px; }
-    /* Code block */
-    .code-block { background: #0d0d1a; border: 1px solid #1f1f35; border-radius: 10px; overflow: hidden; }
+    ::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+    ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
+
+    /* ══ Nav ══ */
+    .site-nav {
+      background: var(--bg-nav);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+
+    /* ══ Gradient text ══ */
+    .gradient-text {
+      background: linear-gradient(135deg, var(--gradient-text-from), var(--gradient-text-to));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ══ Hero glow ══ */
+    .hero-glow {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99,102,241,0.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ══ Code block ══ */
+    .code-block {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
     .code-body { overflow-x: auto; max-height: 420px; overflow-y: auto; }
-    pre { font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.7; padding: 20px; margin: 0; color: #c9d1d9; white-space: pre; }
-    /* Keywords */
-    .kw { color: #ff79c6; }
-    .ty { color: #8be9fd; }
-    .st { color: #f1fa8c; }
-    .cm { color: #6272a4; font-style: italic; }
-    .at { color: #50fa7b; }
-    .nu { color: #bd93f9; }
-    .fn { color: #ffb86c; }
-    /* Nav tab */
-    .tab-btn { transition: all 0.2s; }
-    .tab-btn.active { background: #252540; color: #a5b4fc; border-color: #6366f1; }
-    /* File tree item */
-    .file-item { transition: background 0.15s; }
-    .file-item:hover { background: #161625; }
-    .file-item.selected { background: #1e1e32; border-left: 2px solid #6366f1; }
-    /* Demo table row */
+    pre {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px; line-height: 1.7;
+      padding: 20px; margin: 0;
+      color: var(--text-code);
+      white-space: pre;
+      background: var(--bg-code);
+    }
+    .kw { color: var(--kw-color); }
+    .ty { color: var(--ty-color); }
+    .st { color: var(--st-color); }
+    .cm { color: var(--cm-color); font-style: italic; }
+    .at { color: var(--at-color); }
+    .nu { color: var(--nu-color); }
+    .fn { color: var(--fn-color); }
+
+    /* ══ File tree ══ */
+    .file-tree-panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+    .file-item { transition: background 0.15s; color: var(--text-secondary); }
+    .file-item:hover { background: var(--bg-hover); }
+    .file-item.selected {
+      background: var(--bg-selected);
+      border-left: 2px solid var(--accent-500);
+      color: var(--text-white);
+    }
+
+    /* ══ Demo ══ */
     .demo-row { transition: background 0.15s; }
-    .demo-row:hover { background: #161625; }
-    /* Badge */
-    .badge { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; }
-    /* Modal backdrop */
-    .modal-backdrop { background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); }
-    /* Input focus */
-    input:focus, textarea:focus, select:focus { outline: none; border-color: #6366f1 !important; box-shadow: 0 0 0 3px rgba(99,102,241,0.15); }
-    /* Animate fade in */
+    .demo-row:hover { background: var(--bg-hover); }
+
+    /* ══ Badge ══ */
+    .badge {
+      display: inline-flex; align-items: center;
+      padding: 2px 8px; border-radius: 4px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
+    }
+    .theme-badge {
+      background: var(--badge-bg);
+      border: 1px solid var(--badge-border);
+      color: var(--accent-400);
+    }
+
+    /* ══ Inputs ══ */
+    .theme-input {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+    }
+    .theme-input:focus {
+      outline: none;
+      border-color: var(--accent-500) !important;
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+    }
+
+    /* ══ Cards / surfaces ══ */
+    .theme-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+    }
+    .theme-card-inner {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+    }
+    .theme-desc {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+    }
+
+    /* ══ Buttons ══ */
+    .btn-primary-theme {
+      background: var(--accent-500);
+      color: #fff;
+      transition: opacity 0.2s;
+    }
+    .btn-primary-theme:hover { opacity: 0.88; }
+    .btn-ghost-theme {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      transition: border-color 0.2s;
+    }
+    .btn-ghost-theme:hover { border-color: var(--border-strong); color: var(--text-primary); }
+    .btn-danger-theme { background: #ef4444; color: #fff; transition: opacity 0.2s; }
+    .btn-danger-theme:hover { opacity: 0.88; }
+
+    /* ══ Copy btn ══ */
+    .copy-btn { transition: background 0.2s !important; background: transparent; border: 1px solid var(--border); color: var(--text-muted); }
+    .copy-btn:hover { background: var(--bg-elevated); }
+
+    /* ══ Code header ══ */
+    .code-header { background: var(--bg-surface); border-bottom: 1px solid var(--border); }
+
+    /* ══ Table head ══ */
+    .table-head-row { background: var(--bg-table-head); border-bottom: 1px solid var(--border); }
+    .table-row-sep { border-bottom: 1px solid var(--border); }
+
+    /* ══ Demo container ══ */
+    .demo-container {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-glow);
+    }
+    .demo-bar { background: var(--bg-demo-bar); border-bottom: 1px solid var(--border); }
+
+    /* ══ Arch card ══ */
+    .arch-card { background: var(--arch-bg); border: 1px solid var(--border); }
+    .arch-icon-wrap { background: var(--arch-icon-bg); border: 1px solid var(--arch-icon-bd); }
+
+    /* ══ Section divider ══ */
+    .section-divider { background: var(--border); height: 1px; }
+
+    /* ══ Toast ══ */
+    .toast-box {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-toast);
+    }
+
+    /* ══ Theme toggle button ══ */
+    .theme-toggle {
+      width: 38px; height: 22px;
+      background: var(--bg-elevated);
+      border: 1.5px solid var(--border-strong);
+      border-radius: 11px;
+      position: relative; cursor: pointer;
+      flex-shrink: 0;
+      transition: background 0.25s, border-color 0.25s !important;
+      display: flex; align-items: center; padding: 0 3px;
+    }
+    .theme-toggle .knob {
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--accent-400);
+      transition: transform 0.25s cubic-bezier(0.4,0,0.2,1) !important;
+      transform: translateX(0);
+    }
+    [data-theme="light"] .theme-toggle .knob { transform: translateX(16px); }
+    [data-theme="light"] .theme-toggle { background: #e0e1f8; border-color: var(--accent-400); }
+
+    /* ══ Mobile picker ══ */
+    .mobile-picker { background: var(--bg-surface); border: 1px solid var(--border); color: var(--text-primary); }
+    .mobile-picker option { background: var(--bg-surface); }
+
+    /* ══ Animations ══ */
     @keyframes fadeIn { from { opacity:0; transform: translateY(6px); } to { opacity:1; transform: translateY(0); } }
     .fade-in { animation: fadeIn 0.25s ease forwards; }
-    /* Copy button */
-    .copy-btn { transition: all 0.2s; }
-    .copy-btn:hover { background: #252540; }
-    /* Gradient text */
-    .gradient-text { background: linear-gradient(135deg, #818cf8, #c4b5fd); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    /* Hero glow */
-    .hero-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(99,102,241,0.10) 0%, transparent 70%); pointer-events: none; }
+
+    /* ══ Delete warn box ══ */
+    .delete-warn {
+      background: #1a0808;
+      border: 1px solid #7f1d1d;
+    }
+    [data-theme="light"] .delete-warn {
+      background: #fff1f2;
+      border: 1px solid #fca5a5;
+    }
+    [data-theme="light"] .delete-warn .warn-title { color: #b91c1c; }
+    [data-theme="light"] .delete-warn .warn-icon-wrap { background: #fee2e2; }
+    [data-theme="light"] .delete-warn .warn-icon { color: #dc2626; }
+
+    /* ══ Inline-code chips ══ */
+    .inline-code {
+      background: var(--bg-elevated);
+      color: var(--accent-400);
+      padding: 1px 5px; border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.82em;
+    }
+
+    /* ══ Nav address bar ══ */
+    .nav-addr { color: var(--text-muted); }
+    .nav-addr-running { background:#1a2e1a; color:#50fa7b; border:1px solid #1f3a1f; }
+    [data-theme="light"] .nav-addr-running { background:#d1fae5; color:#065f46; border:1px solid #6ee7b7; }
+
+    /* ══ Hero chip ══ */
+    .hero-chip {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    /* ══ Architecture badge colors (keep vivid on both themes) ══ */
+    .arch-badge-purple { color:#a5b4fc; }
+    .arch-badge-yellow { color:#f1fa8c; }
+    [data-theme="light"] .arch-badge-yellow { color: #854d0e; }
+    .arch-badge-green  { color:#50fa7b; }
+    [data-theme="light"] .arch-badge-green  { color: #065f46; }
+    .arch-badge-orange { color:#ffb86c; }
+    [data-theme="light"] .arch-badge-orange { color: #c05000; }
+    .arch-badge-pink   { color:#ff79c6; }
+    [data-theme="light"] .arch-badge-pink   { color: #9d174d; }
+    .arch-badge-blue   { color:#8be9fd; }
+    [data-theme="light"] .arch-badge-blue   { color: #0369a1; }
+
+    /* ══ Nav badge colors ══ */
+    .nav-badge-net { background:#1a1a2e; color:#818cf8; border:1px solid #252540; }
+    .nav-badge-mvc { background:#1a1a2e; color:#50fa7b; border:1px solid #252540; }
+    [data-theme="light"] .nav-badge-net { background:#ecedf8; color:#5254d0; border:1px solid #c8cadf; }
+    [data-theme="light"] .nav-badge-mvc { background:#d1fae5; color:#065f46; border:1px solid #6ee7b7; }
+
+    /* ══ Hero arch chips ══ */
+    .hero-arch-chip { background:#12122a; border:1px solid #2a2a4a; padding:6px 14px; font-size:12px; }
+    [data-theme="light"] .hero-arch-chip { background:#ecedf8; border-color:#c8cadf; }
+
+    /* file tree section label */
+    .tree-section-label { color: var(--text-muted); border-bottom: 1px solid var(--border); }
+
+    /* ══ Search placeholder ══ */
+    input::placeholder, textarea::placeholder { color: var(--text-muted); }
   </style>
 </head>
-<body class="font-sans min-h-screen">
+<body>
 
   <!-- ═══════════════════════════════════════════════════════════
        TOP NAV
   ═══════════════════════════════════════════════════════════ -->
-  <nav class="sticky top-0 z-50 border-b border-border" style="background:rgba(10,10,15,0.9);backdrop-filter:blur(12px);">
+  <nav class="site-nav sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-14">
       <div class="flex items-center gap-3">
-        <div class="w-7 h-7 rounded-md bg-accent-500 flex items-center justify-center">
+        <div class="w-7 h-7 rounded-md flex items-center justify-center" style="background:#6366f1;">
           <i class="fa-brands fa-microsoft text-white text-xs"></i>
         </div>
-        <span class="font-semibold text-sm text-white hidden sm:block">ASP.NET Core MVC</span>
-        <span class="text-muted text-sm hidden sm:block">/</span>
-        <span class="text-accent-300 text-sm font-mono hidden sm:block">ProductManager</span>
+        <span class="font-semibold text-sm hidden sm:block" style="color:var(--text-white);">ASP.NET Core MVC</span>
+        <span class="text-sm hidden sm:block" style="color:var(--text-muted);">/</span>
+        <span class="text-sm font-mono hidden sm:block" style="color:var(--accent-300);">ProductManager</span>
       </div>
-      <div class="flex items-center gap-2">
-        <span class="badge" style="background:#1a1a2e;color:#818cf8;border:1px solid #252540;">.NET 8.0</span>
-        <span class="badge" style="background:#1a1a2e;color:#50fa7b;border:1px solid #252540;">MVC + Repository</span>
+
+      <div class="flex items-center gap-3">
+        <span class="badge nav-badge-net">.NET 8.0</span>
+        <span class="badge nav-badge-mvc hidden sm:inline-flex">MVC + Repository</span>
+
+        <!-- Theme toggle -->
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-moon text-xs" style="color:var(--text-muted);"></i>
+          <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+            <span class="knob"></span>
+          </button>
+          <i class="fa-solid fa-sun text-xs" style="color:var(--text-muted);"></i>
+        </div>
       </div>
     </div>
   </nav>
@@ -126,89 +443,86 @@
        HERO
   ═══════════════════════════════════════════════════════════ -->
   <section class="relative overflow-hidden py-14 sm:py-20 px-4">
-    <div class="hero-glow top-0 left-1/2 -translate-x-1/2 -translate-y-1/2" style="position:absolute;"></div>
+    <div class="hero-glow" style="top:0;left:50%;transform:translate(-50%,-50%);"></div>
     <div class="max-w-4xl mx-auto text-center relative z-10">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border text-xs text-muted mb-6" style="background:#0f0f1a;">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs mb-6 hero-chip">
         <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
         Complete scaffold — 9 files generated
       </div>
       <h1 class="text-3xl sm:text-5xl font-bold leading-tight mb-4">
-        <span class="text-white">ASP.NET Core MVC</span><br/>
+        <span style="color:var(--text-white);">ASP.NET Core MVC</span><br/>
         <span class="gradient-text">CRUD Application</span>
       </h1>
-      <p class="text-muted text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-        Full scaffold for the <code class="text-accent-300 bg-surface-800 px-2 py-0.5 rounded font-mono text-sm">Product</code> entity — Controller → Repository → Views pattern with EF Core, data annotations, and Bootstrap UI.
+      <p class="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed" style="color:var(--text-muted);">
+        Full scaffold for the <code class="inline-code">Product</code> entity — Controller → Repository → Views pattern with EF Core, data annotations, and Bootstrap UI.
       </p>
       <!-- Architecture chips -->
       <div class="flex flex-wrap justify-center gap-2 mt-8">
-        <span class="badge" style="background:#12122a;color:#a5b4fc;border:1px solid #2a2a4a;padding:6px 14px;font-size:12px;"><i class="fa-solid fa-layer-group mr-1.5"></i>Model</span>
-        <span class="badge" style="background:#12122a;color:#f1fa8c;border:1px solid #2a2a4a;padding:6px 14px;font-size:12px;"><i class="fa-solid fa-database mr-1.5"></i>EF Core</span>
-        <span class="badge" style="background:#12122a;color:#50fa7b;border:1px solid #2a2a4a;padding:6px 14px;font-size:12px;"><i class="fa-solid fa-code-branch mr-1.5"></i>Repository Pattern</span>
-        <span class="badge" style="background:#12122a;color:#ffb86c;border:1px solid #2a2a4a;padding:6px 14px;font-size:12px;"><i class="fa-solid fa-gamepad mr-1.5"></i>MVC Controller</span>
-        <span class="badge" style="background:#12122a;color:#ff79c6;border:1px solid #2a2a4a;padding:6px 14px;font-size:12px;"><i class="fa-solid fa-window-maximize mr-1.5"></i>Razor Views</span>
-        <span class="badge" style="background:#12122a;color:#8be9fd;border:1px solid #2a2a4a;padding:6px 14px;font-size:12px;"><i class="fa-solid fa-gear mr-1.5"></i>DI / Program.cs</span>
+        <span class="badge hero-arch-chip arch-badge-purple"><i class="fa-solid fa-layer-group mr-1.5"></i>Model</span>
+        <span class="badge hero-arch-chip arch-badge-yellow"><i class="fa-solid fa-database mr-1.5"></i>EF Core</span>
+        <span class="badge hero-arch-chip arch-badge-green"><i class="fa-solid fa-code-branch mr-1.5"></i>Repository Pattern</span>
+        <span class="badge hero-arch-chip arch-badge-orange"><i class="fa-solid fa-gamepad mr-1.5"></i>MVC Controller</span>
+        <span class="badge hero-arch-chip arch-badge-pink"><i class="fa-solid fa-window-maximize mr-1.5"></i>Razor Views</span>
+        <span class="badge hero-arch-chip arch-badge-blue"><i class="fa-solid fa-gear mr-1.5"></i>DI / Program.cs</span>
       </div>
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════
-       MAIN LAYOUT: FILE EXPLORER + CODE VIEWER
+       FILE EXPLORER + CODE VIEWER
   ═══════════════════════════════════════════════════════════ -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 pb-10">
-    <!-- Section header -->
     <div class="flex items-center gap-3 mb-6">
-      <div class="h-px flex-1 bg-border"></div>
-      <span class="text-xs text-muted font-mono uppercase tracking-widest">Project Files</span>
-      <div class="h-px flex-1 bg-border"></div>
+      <div class="section-divider flex-1"></div>
+      <span class="text-xs font-mono uppercase tracking-widest" style="color:var(--text-muted);">Project Files</span>
+      <div class="section-divider flex-1"></div>
     </div>
 
     <div class="flex gap-4 lg:gap-6" style="min-height:560px;">
       <!-- File tree sidebar -->
-      <aside class="w-52 sm:w-60 flex-shrink-0 hidden md:flex flex-col" style="background:#0f0f1a;border:1px solid #1f1f35;border-radius:10px;padding:12px 0;">
-        <div class="px-4 py-2 text-xs text-muted font-mono uppercase tracking-widest border-b border-border mb-2 pb-3">
-          <i class="fa-solid fa-folder-open mr-2 text-accent-400"></i>Solution Explorer
+      <aside class="w-52 sm:w-60 flex-shrink-0 hidden md:flex flex-col file-tree-panel" style="padding:12px 0;">
+        <div class="px-4 py-2 text-xs font-mono uppercase tracking-widest tree-section-label mb-2 pb-3">
+          <i class="fa-solid fa-folder-open mr-2" style="color:var(--accent-400);"></i>Solution Explorer
         </div>
-        <!-- Root -->
         <div class="px-3">
-          <div class="text-xs text-muted py-1 px-2 font-mono"><i class="fa-solid fa-csharp mr-1" style="color:#6366f1;"></i>ProductManager.sln</div>
-          <div class="ml-2 text-xs text-muted py-1 px-2 font-mono flex items-center gap-1"><i class="fa-regular fa-folder-open mr-1" style="color:#f1fa8c;"></i>ProductManager</div>
-          <!-- Files -->
+          <div class="text-xs py-1 px-2 font-mono" style="color:var(--text-muted);"><i class="fa-brands fa-microsoft mr-1" style="color:var(--accent-500);"></i>ProductManager.sln</div>
+          <div class="ml-2 text-xs py-1 px-2 font-mono flex items-center gap-1" style="color:var(--text-muted);"><i class="fa-regular fa-folder-open mr-1" style="color:var(--st-color);"></i>ProductManager</div>
           <div id="fileTree" class="ml-4 flex flex-col gap-0.5">
-            <div class="file-item selected rounded px-2 py-1.5 cursor-pointer text-xs font-mono text-white flex items-center gap-2" data-file="model" onclick="selectFile(&#39;model&#39;)">
-              <i class="fa-solid fa-circle text-accent-400" style="font-size:5px;"></i>Product.cs
+            <div class="file-item selected rounded px-2 py-1.5 cursor-pointer text-xs font-mono flex items-center gap-2" data-file="model" onclick="selectFile('model')">
+              <i class="fa-solid fa-circle" style="font-size:5px;color:var(--accent-400);"></i>Product.cs
             </div>
-            <div class="text-xs text-muted px-2 py-1 font-mono opacity-60"><i class="fa-regular fa-folder mr-1"></i>Repositories/</div>
-            <div class="file-item rounded px-2 py-1.5 cursor-pointer text-xs font-mono text-slate-300 flex items-center gap-2 ml-3" data-file="irepository" onclick="selectFile(&#39;irepository&#39;)">
-              <i class="fa-solid fa-circle text-yellow-400" style="font-size:5px;"></i>IProductRepository.cs
+            <div class="text-xs px-2 py-1 font-mono opacity-60" style="color:var(--text-muted);"><i class="fa-regular fa-folder mr-1"></i>Repositories/</div>
+            <div class="file-item rounded px-2 py-1.5 cursor-pointer text-xs font-mono flex items-center gap-2 ml-3" data-file="irepository" onclick="selectFile('irepository')">
+              <i class="fa-solid fa-circle" style="font-size:5px;color:#f1fa8c;"></i>IProductRepository.cs
             </div>
-            <div class="file-item rounded px-2 py-1.5 cursor-pointer text-xs font-mono text-slate-300 flex items-center gap-2 ml-3" data-file="repository" onclick="selectFile(&#39;repository&#39;)">
-              <i class="fa-solid fa-circle text-yellow-400" style="font-size:5px;"></i>ProductRepository.cs
+            <div class="file-item rounded px-2 py-1.5 cursor-pointer text-xs font-mono flex items-center gap-2 ml-3" data-file="repository" onclick="selectFile('repository')">
+              <i class="fa-solid fa-circle" style="font-size:5px;color:#f1fa8c;"></i>ProductRepository.cs
             </div>
-            <div class="file-item rounded px-2 py-1.5 cursor-pointer text-xs font-mono text-slate-300 flex items-center gap-2" data-file="dbcontext" onclick="selectFile(&#39;dbcontext&#39;)">
-              <i class="fa-solid fa-circle text-blue-400" style="font-size:5px;"></i>AppDbContext.cs
+            <div class="file-item rounded px-2 py-1.5 cursor-pointer text-xs font-mono flex items-center gap-2" data-file="dbcontext" onclick="selectFile('dbcontext')">
+              <i class="fa-solid fa-circle" style="font-size:5px;color:#60a5fa;"></i>AppDbContext.cs
             </div>
-            <div class="text-xs text-muted px-2 py-1 font-mono opacity-60"><i class="fa-regular fa-folder mr-1"></i>Controllers/</div>
-            <div class="file-item rounded px-2 py-1.5 cursor-pointer text-xs font-mono text-slate-300 flex items-center gap-2 ml-3" data-file="controller" onclick="selectFile(&#39;controller&#39;)">
-              <i class="fa-solid fa-circle text-orange-400" style="font-size:5px;"></i>ProductsController.cs
+            <div class="text-xs px-2 py-1 font-mono opacity-60" style="color:var(--text-muted);"><i class="fa-regular fa-folder mr-1"></i>Controllers/</div>
+            <div class="file-item rounded px-2 py-1.5 cursor-pointer text-xs font-mono flex items-center gap-2 ml-3" data-file="controller" onclick="selectFile('controller')">
+              <i class="fa-solid fa-circle" style="font-size:5px;color:#fb923c;"></i>ProductsController.cs
             </div>
-            <div class="text-xs text-muted px-2 py-1 font-mono opacity-60"><i class="fa-regular fa-folder mr-1"></i>Views/Products/</div>
-            <div class="file-item rounded px-2 py-1.5 cursor-pointer text-xs font-mono text-slate-300 flex items-center gap-2 ml-3" data-file="index" onclick="selectFile(&#39;index&#39;)">
-              <i class="fa-solid fa-circle text-pink-400" style="font-size:5px;"></i>Index.cshtml
+            <div class="text-xs px-2 py-1 font-mono opacity-60" style="color:var(--text-muted);"><i class="fa-regular fa-folder mr-1"></i>Views/Products/</div>
+            <div class="file-item rounded px-2 py-1.5 cursor-pointer text-xs font-mono flex items-center gap-2 ml-3" data-file="index" onclick="selectFile('index')">
+              <i class="fa-solid fa-circle" style="font-size:5px;color:#f472b6;"></i>Index.cshtml
             </div>
-            <div class="file-item rounded px-2 py-1.5 cursor-pointer text-xs font-mono text-slate-300 flex items-center gap-2 ml-3" data-file="details" onclick="selectFile(&#39;details&#39;)">
-              <i class="fa-solid fa-circle text-pink-400" style="font-size:5px;"></i>Details.cshtml
+            <div class="file-item rounded px-2 py-1.5 cursor-pointer text-xs font-mono flex items-center gap-2 ml-3" data-file="details" onclick="selectFile('details')">
+              <i class="fa-solid fa-circle" style="font-size:5px;color:#f472b6;"></i>Details.cshtml
             </div>
-            <div class="file-item rounded px-2 py-1.5 cursor-pointer text-xs font-mono text-slate-300 flex items-center gap-2 ml-3" data-file="create" onclick="selectFile(&#39;create&#39;)">
-              <i class="fa-solid fa-circle text-pink-400" style="font-size:5px;"></i>Create.cshtml
+            <div class="file-item rounded px-2 py-1.5 cursor-pointer text-xs font-mono flex items-center gap-2 ml-3" data-file="create" onclick="selectFile('create')">
+              <i class="fa-solid fa-circle" style="font-size:5px;color:#f472b6;"></i>Create.cshtml
             </div>
-            <div class="file-item rounded px-2 py-1.5 cursor-pointer text-xs font-mono text-slate-300 flex items-center gap-2 ml-3" data-file="edit" onclick="selectFile(&#39;edit&#39;)">
-              <i class="fa-solid fa-circle text-pink-400" style="font-size:5px;"></i>Edit.cshtml
+            <div class="file-item rounded px-2 py-1.5 cursor-pointer text-xs font-mono flex items-center gap-2 ml-3" data-file="edit" onclick="selectFile('edit')">
+              <i class="fa-solid fa-circle" style="font-size:5px;color:#f472b6;"></i>Edit.cshtml
             </div>
-            <div class="file-item rounded px-2 py-1.5 cursor-pointer text-xs font-mono text-slate-300 flex items-center gap-2 ml-3" data-file="delete" onclick="selectFile(&#39;delete&#39;)">
-              <i class="fa-solid fa-circle text-pink-400" style="font-size:5px;"></i>Delete.cshtml
+            <div class="file-item rounded px-2 py-1.5 cursor-pointer text-xs font-mono flex items-center gap-2 ml-3" data-file="delete" onclick="selectFile('delete')">
+              <i class="fa-solid fa-circle" style="font-size:5px;color:#f472b6;"></i>Delete.cshtml
             </div>
-            <div class="file-item rounded px-2 py-1.5 cursor-pointer text-xs font-mono text-slate-300 flex items-center gap-2" data-file="program" onclick="selectFile(&#39;program&#39;)">
-              <i class="fa-solid fa-circle text-green-400" style="font-size:5px;"></i>Program.cs
+            <div class="file-item rounded px-2 py-1.5 cursor-pointer text-xs font-mono flex items-center gap-2" data-file="program" onclick="selectFile('program')">
+              <i class="fa-solid fa-circle" style="font-size:5px;color:#4ade80;"></i>Program.cs
             </div>
           </div>
         </div>
@@ -218,7 +532,7 @@
       <div class="flex-1 min-w-0 flex flex-col gap-4">
         <!-- Mobile file picker -->
         <div class="md:hidden">
-          <select id="mobileFilePicker" onchange="selectFile(this.value)" class="w-full px-3 py-2 rounded-lg text-sm font-mono text-white border border-border" style="background:#0f0f1a;">
+          <select id="mobileFilePicker" onchange="selectFile(this.value)" class="mobile-picker w-full px-3 py-2 rounded-lg text-sm font-mono">
             <option value="model">Product.cs</option>
             <option value="irepository">IProductRepository.cs</option>
             <option value="repository">ProductRepository.cs</option>
@@ -235,28 +549,26 @@
 
         <!-- Code viewer -->
         <div id="codePanel" class="code-block flex-1 fade-in">
-          <!-- Header -->
-          <div class="flex items-center justify-between px-4 py-3 border-b border-border">
+          <div class="code-header flex items-center justify-between px-4 py-3">
             <div class="flex items-center gap-3">
               <div class="flex gap-1.5">
                 <div class="w-3 h-3 rounded-full" style="background:#ff5f57;"></div>
                 <div class="w-3 h-3 rounded-full" style="background:#febc2e;"></div>
                 <div class="w-3 h-3 rounded-full" style="background:#28c840;"></div>
               </div>
-              <span id="codeFileName" class="text-xs font-mono text-muted">Models/Product.cs</span>
+              <span id="codeFileName" class="text-xs font-mono" style="color:var(--text-muted);">Models/Product.cs</span>
             </div>
-            <button onclick="copyCode()" class="copy-btn flex items-center gap-1.5 text-xs text-muted px-2.5 py-1.5 rounded-md border border-border font-mono">
+            <button onclick="copyCode()" class="copy-btn flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-md font-mono">
               <i class="fa-regular fa-copy"></i><span id="copyLabel">Copy</span>
             </button>
           </div>
-          <!-- Code body -->
           <div class="code-body">
             <pre id="codeContent"></pre>
           </div>
         </div>
 
         <!-- Description card -->
-        <div id="fileDesc" class="rounded-xl border border-border px-5 py-4 text-sm text-slate-400 leading-relaxed" style="background:#0f0f1a;"></div>
+        <div id="fileDesc" class="theme-desc rounded-xl px-5 py-4 text-sm leading-relaxed" style="color:var(--text-secondary);"></div>
       </div>
     </div>
   </section>
@@ -266,106 +578,101 @@
   ═══════════════════════════════════════════════════════════ -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 pb-16">
     <div class="flex items-center gap-3 mb-6">
-      <div class="h-px flex-1 bg-border"></div>
-      <span class="text-xs text-muted font-mono uppercase tracking-widest">Live Demo — Interactive CRUD</span>
-      <div class="h-px flex-1 bg-border"></div>
+      <div class="section-divider flex-1"></div>
+      <span class="text-xs font-mono uppercase tracking-widest" style="color:var(--text-muted);">Live Demo — Interactive CRUD</span>
+      <div class="section-divider flex-1"></div>
     </div>
 
-    <!-- Demo container -->
-    <div class="rounded-2xl border border-border overflow-hidden glow" style="background:#0f0f1a;">
+    <div class="demo-container rounded-2xl overflow-hidden">
       <!-- Demo nav bar -->
-      <div class="flex items-center gap-3 px-5 py-3 border-b border-border" style="background:#0a0a0f;">
+      <div class="demo-bar flex items-center gap-3 px-5 py-3">
         <div class="flex gap-1.5">
           <div class="w-2.5 h-2.5 rounded-full" style="background:#ff5f57;"></div>
           <div class="w-2.5 h-2.5 rounded-full" style="background:#febc2e;"></div>
           <div class="w-2.5 h-2.5 rounded-full" style="background:#28c840;"></div>
         </div>
-        <span class="text-xs font-mono text-muted flex-1">localhost:5000/Products</span>
-        <span class="badge" style="background:#1a2e1a;color:#50fa7b;border:1px solid #1f3a1f;font-size:10px;"><i class="fa-solid fa-circle text-green-400 mr-1" style="font-size:6px;"></i>Running</span>
+        <span class="text-xs font-mono nav-addr flex-1">localhost:5000/Products</span>
+        <span class="badge nav-addr-running text-xs"><i class="fa-solid fa-circle mr-1" style="font-size:6px;"></i>Running</span>
       </div>
 
       <!-- Demo content -->
       <div class="p-5 sm:p-8">
-        <!-- Demo view switcher -->
+
+        <!-- INDEX VIEW -->
         <div id="demo-index" class="demo-view fade-in">
-          <!-- Toolbar -->
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
             <div>
-              <h2 class="text-xl font-semibold text-white">Products</h2>
-              <p class="text-xs text-muted mt-0.5">Index — All items from ProductsController.Index()</p>
+              <h2 class="text-xl font-semibold" style="color:var(--text-white);">Products</h2>
+              <p class="text-xs mt-0.5" style="color:var(--text-muted);">Index — All items from ProductsController.Index()</p>
             </div>
-            <button onclick="showView(&#39;create&#39;)" class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-white transition-all hover:opacity-90" style="background:#6366f1;">
+            <button onclick="showView('create')" class="btn-primary-theme flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium">
               <i class="fa-solid fa-plus"></i> Create New
             </button>
           </div>
-
-          <!-- Search bar -->
+          <!-- Search -->
           <div class="mb-4 relative">
-            <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-muted text-sm"></i>
-            <input id="searchInput" type="text" placeholder="Search products..." oninput="renderTable()" class="w-full pl-9 pr-4 py-2 text-sm rounded-lg border border-border text-white font-mono" style="background:#161625;"/>
+            <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-sm" style="color:var(--text-muted);"></i>
+            <input id="searchInput" type="text" placeholder="Search products..." oninput="renderTable()" class="theme-input w-full pl-9 pr-4 py-2 text-sm rounded-lg font-mono" />
           </div>
-
           <!-- Table -->
-          <div class="overflow-x-auto rounded-xl border border-border">
+          <div class="overflow-x-auto rounded-xl" style="border:1px solid var(--border);">
             <table class="w-full text-sm">
               <thead>
-                <tr style="background:#0d0d1a;border-bottom:1px solid #1f1f35;">
-                  <th class="px-4 py-3 text-left text-xs font-semibold text-muted uppercase tracking-wider">Id</th>
-                  <th class="px-4 py-3 text-left text-xs font-semibold text-muted uppercase tracking-wider">Name</th>
-                  <th class="px-4 py-3 text-left text-xs font-semibold text-muted uppercase tracking-wider">Category</th>
-                  <th class="px-4 py-3 text-right text-xs font-semibold text-muted uppercase tracking-wider">Price</th>
-                  <th class="px-4 py-3 text-left text-xs font-semibold text-muted uppercase tracking-wider">Stock</th>
-                  <th class="px-4 py-3 text-left text-xs font-semibold text-muted uppercase tracking-wider">Created</th>
-                  <th class="px-4 py-3 text-left text-xs font-semibold text-muted uppercase tracking-wider">Actions</th>
+                <tr class="table-head-row">
+                  <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color:var(--text-muted);">Id</th>
+                  <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color:var(--text-muted);">Name</th>
+                  <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color:var(--text-muted);">Category</th>
+                  <th class="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wider" style="color:var(--text-muted);">Price</th>
+                  <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color:var(--text-muted);">Stock</th>
+                  <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color:var(--text-muted);">Created</th>
+                  <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color:var(--text-muted);">Actions</th>
                 </tr>
               </thead>
               <tbody id="productTableBody"></tbody>
             </table>
           </div>
-          <p id="noResults" class="text-center text-muted text-sm py-8 hidden">No products found.</p>
-          <div id="tableStats" class="mt-3 text-xs text-muted font-mono"></div>
+          <p id="noResults" class="text-center text-sm py-8 hidden" style="color:var(--text-muted);">No products found.</p>
+          <div id="tableStats" class="mt-3 text-xs font-mono" style="color:var(--text-muted);"></div>
         </div>
 
-        <!-- Details view -->
+        <!-- DETAILS VIEW -->
         <div id="demo-details" class="demo-view hidden fade-in">
           <div class="flex items-center gap-3 mb-6">
-            <button onclick="showView(&#39;index&#39;)" class="text-muted hover:text-white transition-colors text-sm flex items-center gap-1.5">
+            <button onclick="showView('index')" class="text-sm flex items-center gap-1.5 transition-colors" style="color:var(--text-muted);" onmouseover="this.style.color='var(--text-white)'" onmouseout="this.style.color='var(--text-muted)'">
               <i class="fa-solid fa-arrow-left"></i> Back to List
             </button>
-            <span class="text-muted">/</span>
-            <span class="text-white text-sm font-medium">Product Details</span>
+            <span style="color:var(--text-muted);">/</span>
+            <span class="text-sm font-medium" style="color:var(--text-white);">Product Details</span>
           </div>
-          <p class="text-xs text-muted mb-6 font-mono">ProductsController.Details(id)</p>
-          <div id="detailsContent" class="rounded-xl border border-border overflow-hidden" style="background:#0d0d1a;"></div>
+          <p class="text-xs font-mono mb-6" style="color:var(--text-muted);">ProductsController.Details(id)</p>
+          <div id="detailsContent" class="theme-card-inner rounded-xl overflow-hidden"></div>
           <div class="flex gap-3 mt-6">
-            <button id="detailsEditBtn" class="px-4 py-2 rounded-lg text-sm font-medium text-white transition-all hover:opacity-90" style="background:#6366f1;">
+            <button id="detailsEditBtn" class="btn-primary-theme px-4 py-2 rounded-lg text-sm font-medium">
               <i class="fa-solid fa-pen mr-1.5"></i> Edit
             </button>
-            <button onclick="showView(&#39;index&#39;)" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 border border-border hover:border-slate-500 transition-all">
-              Back to List
-            </button>
+            <button onclick="showView('index')" class="btn-ghost-theme px-4 py-2 rounded-lg text-sm font-medium">Back to List</button>
           </div>
         </div>
 
-        <!-- Create view -->
+        <!-- CREATE VIEW -->
         <div id="demo-create" class="demo-view hidden fade-in">
           <div class="flex items-center gap-3 mb-6">
-            <button onclick="showView(&#39;index&#39;)" class="text-muted hover:text-white transition-colors text-sm flex items-center gap-1.5">
+            <button onclick="showView('index')" class="text-sm flex items-center gap-1.5" style="color:var(--text-muted);" onmouseover="this.style.color='var(--text-white)'" onmouseout="this.style.color='var(--text-muted)'">
               <i class="fa-solid fa-arrow-left"></i> Back to List
             </button>
-            <span class="text-muted">/</span>
-            <span class="text-white text-sm font-medium">Create Product</span>
+            <span style="color:var(--text-muted);">/</span>
+            <span class="text-sm font-medium" style="color:var(--text-white);">Create Product</span>
           </div>
-          <p class="text-xs text-muted mb-6 font-mono">ProductsController.Create() [HttpPost]</p>
-          <div class="rounded-xl border border-border p-6" style="background:#0d0d1a;">
+          <p class="text-xs font-mono mb-6" style="color:var(--text-muted);">ProductsController.Create() [HttpPost]</p>
+          <div class="theme-card-inner rounded-xl p-6">
             <form id="createForm" onsubmit="submitCreate(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div class="sm:col-span-2">
-                <label class="block text-xs font-semibold text-slate-400 mb-1.5 font-mono">[Required] Name</label>
-                <input name="Name" required="" placeholder="e.g. Wireless Keyboard" class="w-full px-3 py-2.5 text-sm rounded-lg border border-border text-white font-mono" style="background:#161625;"/>
+                <label class="block text-xs font-semibold mb-1.5 font-mono" style="color:var(--text-secondary);">[Required] Name</label>
+                <input name="Name" required placeholder="e.g. Wireless Keyboard" class="theme-input w-full px-3 py-2.5 text-sm rounded-lg font-mono" />
               </div>
               <div>
-                <label class="block text-xs font-semibold text-slate-400 mb-1.5 font-mono">Category</label>
-                <select name="Category" class="w-full px-3 py-2.5 text-sm rounded-lg border border-border text-white" style="background:#161625;">
+                <label class="block text-xs font-semibold mb-1.5 font-mono" style="color:var(--text-secondary);">Category</label>
+                <select name="Category" class="theme-input w-full px-3 py-2.5 text-sm rounded-lg">
                   <option value="Electronics">Electronics</option>
                   <option value="Clothing">Clothing</option>
                   <option value="Food">Food</option>
@@ -374,47 +681,47 @@
                 </select>
               </div>
               <div>
-                <label class="block text-xs font-semibold text-slate-400 mb-1.5 font-mono">[Range(0.01, 999999)] Price (decimal)</label>
-                <input name="Price" type="number" step="0.01" min="0.01" required="" placeholder="0.00" class="w-full px-3 py-2.5 text-sm rounded-lg border border-border text-white font-mono" style="background:#161625;"/>
+                <label class="block text-xs font-semibold mb-1.5 font-mono" style="color:var(--text-secondary);">[Range(0.01, 999999)] Price (decimal)</label>
+                <input name="Price" type="number" step="0.01" min="0.01" required placeholder="0.00" class="theme-input w-full px-3 py-2.5 text-sm rounded-lg font-mono" />
               </div>
               <div>
-                <label class="block text-xs font-semibold text-slate-400 mb-1.5 font-mono">Stock (int)</label>
-                <input name="Stock" type="number" min="0" required="" placeholder="0" class="w-full px-3 py-2.5 text-sm rounded-lg border border-border text-white font-mono" style="background:#161625;"/>
+                <label class="block text-xs font-semibold mb-1.5 font-mono" style="color:var(--text-secondary);">Stock (int)</label>
+                <input name="Stock" type="number" min="0" required placeholder="0" class="theme-input w-full px-3 py-2.5 text-sm rounded-lg font-mono" />
               </div>
               <div class="sm:col-span-2">
-                <label class="block text-xs font-semibold text-slate-400 mb-1.5 font-mono">Description</label>
-                <textarea name="Description" rows="3" placeholder="Optional product description..." class="w-full px-3 py-2.5 text-sm rounded-lg border border-border text-white font-mono resize-none" style="background:#161625;"></textarea>
+                <label class="block text-xs font-semibold mb-1.5 font-mono" style="color:var(--text-secondary);">Description</label>
+                <textarea name="Description" rows="3" placeholder="Optional product description..." class="theme-input w-full px-3 py-2.5 text-sm rounded-lg font-mono resize-none"></textarea>
               </div>
               <div class="sm:col-span-2 flex gap-3">
-                <button type="submit" class="px-5 py-2.5 rounded-lg text-sm font-semibold text-white transition-all hover:opacity-90" style="background:#6366f1;">
+                <button type="submit" class="btn-primary-theme px-5 py-2.5 rounded-lg text-sm font-semibold">
                   <i class="fa-solid fa-check mr-1.5"></i> Create
                 </button>
-                <button type="button" onclick="showView(&#39;index&#39;)" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 border border-border hover:border-slate-500 transition-all">Cancel</button>
+                <button type="button" onclick="showView('index')" class="btn-ghost-theme px-4 py-2.5 rounded-lg text-sm font-medium">Cancel</button>
               </div>
             </form>
           </div>
         </div>
 
-        <!-- Edit view -->
+        <!-- EDIT VIEW -->
         <div id="demo-edit" class="demo-view hidden fade-in">
           <div class="flex items-center gap-3 mb-6">
-            <button onclick="showView(&#39;index&#39;)" class="text-muted hover:text-white transition-colors text-sm flex items-center gap-1.5">
+            <button onclick="showView('index')" class="text-sm flex items-center gap-1.5" style="color:var(--text-muted);" onmouseover="this.style.color='var(--text-white)'" onmouseout="this.style.color='var(--text-muted)'">
               <i class="fa-solid fa-arrow-left"></i> Back to List
             </button>
-            <span class="text-muted">/</span>
-            <span class="text-white text-sm font-medium">Edit Product</span>
+            <span style="color:var(--text-muted);">/</span>
+            <span class="text-sm font-medium" style="color:var(--text-white);">Edit Product</span>
           </div>
-          <p class="text-xs text-muted mb-6 font-mono">ProductsController.Edit(id) [HttpPost]</p>
-          <div class="rounded-xl border border-border p-6" style="background:#0d0d1a;">
+          <p class="text-xs font-mono mb-6" style="color:var(--text-muted);">ProductsController.Edit(id) [HttpPost]</p>
+          <div class="theme-card-inner rounded-xl p-6">
             <form id="editForm" onsubmit="submitEdit(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <input type="hidden" name="Id" id="editId"/>
+              <input type="hidden" name="Id" id="editId" />
               <div class="sm:col-span-2">
-                <label class="block text-xs font-semibold text-slate-400 mb-1.5 font-mono">[Required] Name</label>
-                <input id="editName" name="Name" required="" class="w-full px-3 py-2.5 text-sm rounded-lg border border-border text-white font-mono" style="background:#161625;"/>
+                <label class="block text-xs font-semibold mb-1.5 font-mono" style="color:var(--text-secondary);">[Required] Name</label>
+                <input id="editName" name="Name" required class="theme-input w-full px-3 py-2.5 text-sm rounded-lg font-mono" />
               </div>
               <div>
-                <label class="block text-xs font-semibold text-slate-400 mb-1.5 font-mono">Category</label>
-                <select id="editCategory" name="Category" class="w-full px-3 py-2.5 text-sm rounded-lg border border-border text-white" style="background:#161625;">
+                <label class="block text-xs font-semibold mb-1.5 font-mono" style="color:var(--text-secondary);">Category</label>
+                <select id="editCategory" name="Category" class="theme-input w-full px-3 py-2.5 text-sm rounded-lg">
                   <option value="Electronics">Electronics</option>
                   <option value="Clothing">Clothing</option>
                   <option value="Food">Food</option>
@@ -423,121 +730,119 @@
                 </select>
               </div>
               <div>
-                <label class="block text-xs font-semibold text-slate-400 mb-1.5 font-mono">Price (decimal)</label>
-                <input id="editPrice" name="Price" type="number" step="0.01" min="0.01" required="" class="w-full px-3 py-2.5 text-sm rounded-lg border border-border text-white font-mono" style="background:#161625;"/>
+                <label class="block text-xs font-semibold mb-1.5 font-mono" style="color:var(--text-secondary);">Price (decimal)</label>
+                <input id="editPrice" name="Price" type="number" step="0.01" min="0.01" required class="theme-input w-full px-3 py-2.5 text-sm rounded-lg font-mono" />
               </div>
               <div>
-                <label class="block text-xs font-semibold text-slate-400 mb-1.5 font-mono">Stock (int)</label>
-                <input id="editStock" name="Stock" type="number" min="0" required="" class="w-full px-3 py-2.5 text-sm rounded-lg border border-border text-white font-mono" style="background:#161625;"/>
+                <label class="block text-xs font-semibold mb-1.5 font-mono" style="color:var(--text-secondary);">Stock (int)</label>
+                <input id="editStock" name="Stock" type="number" min="0" required class="theme-input w-full px-3 py-2.5 text-sm rounded-lg font-mono" />
               </div>
               <div class="sm:col-span-2">
-                <label class="block text-xs font-semibold text-slate-400 mb-1.5 font-mono">Description</label>
-                <textarea id="editDescription" name="Description" rows="3" class="w-full px-3 py-2.5 text-sm rounded-lg border border-border text-white font-mono resize-none" style="background:#161625;"></textarea>
+                <label class="block text-xs font-semibold mb-1.5 font-mono" style="color:var(--text-secondary);">Description</label>
+                <textarea id="editDescription" name="Description" rows="3" class="theme-input w-full px-3 py-2.5 text-sm rounded-lg font-mono resize-none"></textarea>
               </div>
               <div class="sm:col-span-2 flex gap-3">
-                <button type="submit" class="px-5 py-2.5 rounded-lg text-sm font-semibold text-white transition-all hover:opacity-90" style="background:#6366f1;">
+                <button type="submit" class="btn-primary-theme px-5 py-2.5 rounded-lg text-sm font-semibold">
                   <i class="fa-solid fa-floppy-disk mr-1.5"></i> Save Changes
                 </button>
-                <button type="button" onclick="showView(&#39;index&#39;)" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 border border-border hover:border-slate-500 transition-all">Cancel</button>
+                <button type="button" onclick="showView('index')" class="btn-ghost-theme px-4 py-2.5 rounded-lg text-sm font-medium">Cancel</button>
               </div>
             </form>
           </div>
         </div>
 
-        <!-- Delete view -->
+        <!-- DELETE VIEW -->
         <div id="demo-delete" class="demo-view hidden fade-in">
           <div class="flex items-center gap-3 mb-6">
-            <button onclick="showView(&#39;index&#39;)" class="text-muted hover:text-white transition-colors text-sm flex items-center gap-1.5">
+            <button onclick="showView('index')" class="text-sm flex items-center gap-1.5" style="color:var(--text-muted);" onmouseover="this.style.color='var(--text-white)'" onmouseout="this.style.color='var(--text-muted)'">
               <i class="fa-solid fa-arrow-left"></i> Back to List
             </button>
-            <span class="text-muted">/</span>
-            <span class="text-white text-sm font-medium">Delete Confirmation</span>
+            <span style="color:var(--text-muted);">/</span>
+            <span class="text-sm font-medium" style="color:var(--text-white);">Delete Confirmation</span>
           </div>
-          <p class="text-xs text-muted mb-6 font-mono">ProductsController.DeleteConfirmed(id) [HttpPost]</p>
-          <div class="rounded-xl border border-red-900 p-6 mb-6" style="background:#1a0808;">
+          <p class="text-xs font-mono mb-6" style="color:var(--text-muted);">ProductsController.DeleteConfirmed(id) [HttpPost]</p>
+          <div class="delete-warn rounded-xl p-6 mb-6">
             <div class="flex items-start gap-4">
-              <div class="w-10 h-10 rounded-full bg-red-900 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <i class="fa-solid fa-triangle-exclamation text-red-400"></i>
+              <div class="warn-icon-wrap w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background:#7f1d1d;">
+                <i class="warn-icon fa-solid fa-triangle-exclamation" style="color:#f87171;"></i>
               </div>
               <div>
-                <h3 class="text-base font-semibold text-red-300 mb-1">Confirm Delete</h3>
-                <p class="text-sm text-slate-400">Are you sure you want to delete this product? This action cannot be undone.</p>
+                <h3 class="warn-title text-base font-semibold mb-1" style="color:#fca5a5;">Confirm Delete</h3>
+                <p class="text-sm" style="color:var(--text-secondary);">Are you sure you want to delete this product? This action cannot be undone.</p>
               </div>
             </div>
           </div>
-          <div id="deleteContent" class="rounded-xl border border-border p-5 mb-6" style="background:#0d0d1a;"></div>
+          <div id="deleteContent" class="theme-card-inner rounded-xl p-5 mb-6"></div>
           <div class="flex gap-3">
-            <button id="confirmDeleteBtn" class="px-5 py-2.5 rounded-lg text-sm font-semibold text-white transition-all hover:opacity-90" style="background:#ef4444;">
+            <button id="confirmDeleteBtn" class="btn-danger-theme px-5 py-2.5 rounded-lg text-sm font-semibold">
               <i class="fa-solid fa-trash mr-1.5"></i> Delete
             </button>
-            <button onclick="showView(&#39;index&#39;)" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 border border-border hover:border-slate-500 transition-all">Cancel</button>
+            <button onclick="showView('index')" class="btn-ghost-theme px-4 py-2.5 rounded-lg text-sm font-medium">Cancel</button>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════
-       ARCHITECTURE DIAGRAM
+       ARCHITECTURE OVERVIEW
   ═══════════════════════════════════════════════════════════ -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 pb-16">
     <div class="flex items-center gap-3 mb-6">
-      <div class="h-px flex-1 bg-border"></div>
-      <span class="text-xs text-muted font-mono uppercase tracking-widest">Architecture Overview</span>
-      <div class="h-px flex-1 bg-border"></div>
+      <div class="section-divider flex-1"></div>
+      <span class="text-xs font-mono uppercase tracking-widest" style="color:var(--text-muted);">Architecture Overview</span>
+      <div class="section-divider flex-1"></div>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-      <!-- Layer 1 -->
-      <div class="rounded-xl border border-border p-5" style="background:#0f0f1a;">
-        <div class="w-9 h-9 rounded-lg flex items-center justify-center mb-4" style="background:#1a1a2e;border:1px solid #252540;">
-          <i class="fa-solid fa-window-maximize text-pink-400"></i>
+      <div class="arch-card rounded-xl p-5">
+        <div class="arch-icon-wrap w-9 h-9 rounded-lg flex items-center justify-center mb-4">
+          <i class="fa-solid fa-window-maximize" style="color:#f472b6;"></i>
         </div>
-        <h3 class="font-semibold text-white mb-2 text-sm">Presentation Layer</h3>
-        <p class="text-xs text-muted leading-relaxed mb-3">Razor Views (.cshtml) with Bootstrap 5 styling, Tag Helpers for form binding, and anti-forgery tokens.</p>
+        <h3 class="font-semibold mb-2 text-sm" style="color:var(--text-white);">Presentation Layer</h3>
+        <p class="text-xs leading-relaxed mb-3" style="color:var(--text-muted);">Razor Views (.cshtml) with Bootstrap 5 styling, Tag Helpers for form binding, and anti-forgery tokens.</p>
         <div class="flex flex-col gap-1">
-          <span class="text-xs font-mono text-pink-300"><i class="fa-solid fa-file mr-1.5"></i>Views/Products/Index.cshtml</span>
-          <span class="text-xs font-mono text-pink-300"><i class="fa-solid fa-file mr-1.5"></i>Views/Products/Create.cshtml</span>
-          <span class="text-xs font-mono text-pink-300"><i class="fa-solid fa-file mr-1.5"></i>Views/Products/Edit.cshtml</span>
-          <span class="text-xs font-mono text-pink-300"><i class="fa-solid fa-file mr-1.5"></i>Views/Products/Details.cshtml</span>
-          <span class="text-xs font-mono text-pink-300"><i class="fa-solid fa-file mr-1.5"></i>Views/Products/Delete.cshtml</span>
+          <span class="text-xs font-mono arch-badge-pink"><i class="fa-solid fa-file mr-1.5"></i>Views/Products/Index.cshtml</span>
+          <span class="text-xs font-mono arch-badge-pink"><i class="fa-solid fa-file mr-1.5"></i>Views/Products/Create.cshtml</span>
+          <span class="text-xs font-mono arch-badge-pink"><i class="fa-solid fa-file mr-1.5"></i>Views/Products/Edit.cshtml</span>
+          <span class="text-xs font-mono arch-badge-pink"><i class="fa-solid fa-file mr-1.5"></i>Views/Products/Details.cshtml</span>
+          <span class="text-xs font-mono arch-badge-pink"><i class="fa-solid fa-file mr-1.5"></i>Views/Products/Delete.cshtml</span>
         </div>
       </div>
-      <!-- Layer 2 -->
-      <div class="rounded-xl border border-border p-5" style="background:#0f0f1a;">
-        <div class="w-9 h-9 rounded-lg flex items-center justify-center mb-4" style="background:#1a1a2e;border:1px solid #252540;">
-          <i class="fa-solid fa-gamepad text-orange-400"></i>
+      <div class="arch-card rounded-xl p-5">
+        <div class="arch-icon-wrap w-9 h-9 rounded-lg flex items-center justify-center mb-4">
+          <i class="fa-solid fa-gamepad" style="color:#fb923c;"></i>
         </div>
-        <h3 class="font-semibold text-white mb-2 text-sm">Application Layer</h3>
-        <p class="text-xs text-muted leading-relaxed mb-3">MVC Controller handles HTTP verbs, model binding, validation via ModelState, and redirects.</p>
+        <h3 class="font-semibold mb-2 text-sm" style="color:var(--text-white);">Application Layer</h3>
+        <p class="text-xs leading-relaxed mb-3" style="color:var(--text-muted);">MVC Controller handles HTTP verbs, model binding, validation via ModelState, and redirects.</p>
         <div class="flex flex-col gap-1">
-          <span class="text-xs font-mono text-orange-300"><i class="fa-solid fa-file mr-1.5"></i>ProductsController.cs</span>
-          <span class="text-xs font-mono text-slate-500"><i class="fa-solid fa-arrow-right mr-1.5"></i>GET /Products</span>
-          <span class="text-xs font-mono text-slate-500"><i class="fa-solid fa-arrow-right mr-1.5"></i>POST /Products/Create</span>
-          <span class="text-xs font-mono text-slate-500"><i class="fa-solid fa-arrow-right mr-1.5"></i>POST /Products/Edit/{id}</span>
-          <span class="text-xs font-mono text-slate-500"><i class="fa-solid fa-arrow-right mr-1.5"></i>POST /Products/Delete/{id}</span>
+          <span class="text-xs font-mono arch-badge-orange"><i class="fa-solid fa-file mr-1.5"></i>ProductsController.cs</span>
+          <span class="text-xs font-mono" style="color:var(--text-muted);"><i class="fa-solid fa-arrow-right mr-1.5"></i>GET /Products</span>
+          <span class="text-xs font-mono" style="color:var(--text-muted);"><i class="fa-solid fa-arrow-right mr-1.5"></i>POST /Products/Create</span>
+          <span class="text-xs font-mono" style="color:var(--text-muted);"><i class="fa-solid fa-arrow-right mr-1.5"></i>POST /Products/Edit/{id}</span>
+          <span class="text-xs font-mono" style="color:var(--text-muted);"><i class="fa-solid fa-arrow-right mr-1.5"></i>POST /Products/Delete/{id}</span>
         </div>
       </div>
-      <!-- Layer 3 -->
-      <div class="rounded-xl border border-border p-5" style="background:#0f0f1a;">
-        <div class="w-9 h-9 rounded-lg flex items-center justify-center mb-4" style="background:#1a1a2e;border:1px solid #252540;">
-          <i class="fa-solid fa-database text-blue-400"></i>
+      <div class="arch-card rounded-xl p-5">
+        <div class="arch-icon-wrap w-9 h-9 rounded-lg flex items-center justify-center mb-4">
+          <i class="fa-solid fa-database" style="color:#60a5fa;"></i>
         </div>
-        <h3 class="font-semibold text-white mb-2 text-sm">Data Layer</h3>
-        <p class="text-xs text-muted leading-relaxed mb-3">Repository pattern abstracts EF Core. Registered as Scoped service. AppDbContext with SQL Server provider.</p>
+        <h3 class="font-semibold mb-2 text-sm" style="color:var(--text-white);">Data Layer</h3>
+        <p class="text-xs leading-relaxed mb-3" style="color:var(--text-muted);">Repository pattern abstracts EF Core. Registered as Scoped service. AppDbContext with SQL Server provider.</p>
         <div class="flex flex-col gap-1">
-          <span class="text-xs font-mono text-blue-300"><i class="fa-solid fa-file mr-1.5"></i>IProductRepository.cs</span>
-          <span class="text-xs font-mono text-blue-300"><i class="fa-solid fa-file mr-1.5"></i>ProductRepository.cs</span>
-          <span class="text-xs font-mono text-blue-300"><i class="fa-solid fa-file mr-1.5"></i>AppDbContext.cs</span>
-          <span class="text-xs font-mono text-slate-500"><i class="fa-solid fa-arrow-right mr-1.5"></i>SQL Server / LocalDB</span>
+          <span class="text-xs font-mono arch-badge-blue"><i class="fa-solid fa-file mr-1.5"></i>IProductRepository.cs</span>
+          <span class="text-xs font-mono arch-badge-blue"><i class="fa-solid fa-file mr-1.5"></i>ProductRepository.cs</span>
+          <span class="text-xs font-mono arch-badge-blue"><i class="fa-solid fa-file mr-1.5"></i>AppDbContext.cs</span>
+          <span class="text-xs font-mono" style="color:var(--text-muted);"><i class="fa-solid fa-arrow-right mr-1.5"></i>SQL Server / LocalDB</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Toast notification -->
+  <!-- Toast -->
   <div id="toast" class="fixed bottom-6 right-6 z-50 hidden">
-    <div class="flex items-center gap-3 px-4 py-3 rounded-xl border border-border text-sm font-medium text-white" style="background:#161625;box-shadow:0 8px 32px rgba(0,0,0,0.5);">
-      <i id="toastIcon" class="fa-solid fa-check text-green-400"></i>
+    <div class="toast-box flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium" style="color:var(--text-white);">
+      <i id="toastIcon" class="fa-solid fa-check" style="color:#50fa7b;"></i>
       <span id="toastMsg"></span>
     </div>
   </div>
@@ -545,11 +850,26 @@
   <script>
   document.addEventListener('DOMContentLoaded', function () {
 
-    // ─── CODE CONTENT MAP ────────────────────────────────────────────────────────
+    // ─── THEME ────────────────────────────────────────────────────────────────
+    const saved = localStorage.getItem('pm_theme') || 'dark';
+    applyTheme(saved);
+
+    window.toggleTheme = function () {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      localStorage.setItem('pm_theme', next);
+    };
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+    }
+
+    // ─── CODE CONTENT MAP ─────────────────────────────────────────────────────
     const files = {
       model: {
         name: 'Models/Product.cs',
-        desc: '<strong class="text-white">Product.cs</strong> — The domain model with Data Annotations for validation and EF Core column mapping. <code class="text-accent-300 bg-surface-800 px-1 py-0.5 rounded text-xs font-mono">[Required]</code>, <code class="text-accent-300 bg-surface-800 px-1 py-0.5 rounded text-xs font-mono">[Range]</code>, and <code class="text-accent-300 bg-surface-800 px-1 py-0.5 rounded text-xs font-mono">[Display]</code> attributes drive both ModelState validation in the controller and Bootstrap validation classes in the views.',
+        desc: '<strong>Product.cs</strong> — The domain model with Data Annotations for validation and EF Core column mapping. <code class="inline-code">[Required]</code>, <code class="inline-code">[Range]</code>, and <code class="inline-code">[Display]</code> attributes drive both ModelState validation in the controller and Bootstrap validation classes in the views.',
         code: `<span class="cm">// Models/Product.cs</span>
 <span class="kw">using</span> System;
 <span class="kw">using</span> System.ComponentModel.DataAnnotations;
@@ -600,7 +920,7 @@
       },
       irepository: {
         name: 'Repositories/IProductRepository.cs',
-        desc: '<strong class="text-white">IProductRepository.cs</strong> — The contract for the data access layer. Defines all CRUD operations as async methods returning <code class="text-accent-300 bg-surface-800 px-1 py-0.5 rounded text-xs font-mono">Task&lt;T&gt;</code>. The controller depends on this interface (not the concrete class), keeping it decoupled and testable via mocking.',
+        desc: '<strong>IProductRepository.cs</strong> — The contract for the data access layer. Defines all CRUD operations as async methods returning <code class="inline-code">Task&lt;T&gt;</code>. The controller depends on this interface (not the concrete class), keeping it decoupled and testable via mocking.',
         code: `<span class="cm">// Repositories/IProductRepository.cs</span>
 <span class="kw">using</span> System.Collections.Generic;
 <span class="kw">using</span> System.Threading.Tasks;
@@ -636,7 +956,7 @@
       },
       repository: {
         name: 'Repositories/ProductRepository.cs',
-        desc: '<strong class="text-white">ProductRepository.cs</strong> — EF Core implementation of the interface. Uses <code class="text-accent-300 bg-surface-800 px-1 py-0.5 rounded text-xs font-mono">AppDbContext</code> injected via constructor. All operations are async/await for non-blocking I/O. Registered as <code class="text-accent-300 bg-surface-800 px-1 py-0.5 rounded text-xs font-mono">AddScoped</code> in <code class="text-accent-300 bg-surface-800 px-1 py-0.5 rounded text-xs font-mono">Program.cs</code> — one instance per HTTP request.',
+        desc: '<strong>ProductRepository.cs</strong> — EF Core implementation of the interface. Uses <code class="inline-code">AppDbContext</code> injected via constructor. All operations are async/await for non-blocking I/O. Registered as <code class="inline-code">AddScoped</code> in <code class="inline-code">Program.cs</code> — one instance per HTTP request.',
         code: `<span class="cm">// Repositories/ProductRepository.cs</span>
 <span class="kw">using</span> System;
 <span class="kw">using</span> System.Collections.Generic;
@@ -707,7 +1027,7 @@
       },
       dbcontext: {
         name: 'Data/AppDbContext.cs',
-        desc: '<strong class="text-white">AppDbContext.cs</strong> — EF Core database context. Inherits <code class="text-accent-300 bg-surface-800 px-1 py-0.5 rounded text-xs font-mono">DbContext</code> and exposes a <code class="text-accent-300 bg-surface-800 px-1 py-0.5 rounded text-xs font-mono">DbSet&lt;Product&gt;</code>. <code class="text-accent-300 bg-surface-800 px-1 py-0.5 rounded text-xs font-mono">OnModelCreating</code> applies Fluent API configurations and seeds initial data. Run <code class="text-accent-300 bg-surface-800 px-1 py-0.5 rounded text-xs font-mono">dotnet ef migrations add Init</code> to generate the first migration.',
+        desc: '<strong>AppDbContext.cs</strong> — EF Core database context. Inherits <code class="inline-code">DbContext</code> and exposes a <code class="inline-code">DbSet&lt;Product&gt;</code>. <code class="inline-code">OnModelCreating</code> applies Fluent API configurations and seeds initial data. Run <code class="inline-code">dotnet ef migrations add Init</code> to generate the first migration.',
         code: `<span class="cm">// Data/AppDbContext.cs</span>
 <span class="kw">using</span> System;
 <span class="kw">using</span> Microsoft.EntityFrameworkCore;
@@ -735,10 +1055,9 @@
                       .<span class="fn">HasMaxLength</span>(<span class="nu">200</span>);
                 entity.<span class="fn">Property</span>(p =&gt; p.Price)
                       .<span class="fn">HasColumnType</span>(<span class="st">"decimal(18,2)"</span>);
-                entity.<span class="fn">HasIndex</span>(p =&gt; p.Name);  <span class="cm">// index for search perf</span>
+                entity.<span class="fn">HasIndex</span>(p =&gt; p.Name);
             });
 
-            <span class="cm">// Seed data</span>
             modelBuilder.<span class="fn">Entity</span>&lt;<span class="ty">Product</span>&gt;().<span class="fn">HasData</span>(
                 <span class="kw">new</span> <span class="ty">Product</span>
                 {
@@ -767,7 +1086,7 @@
       },
       controller: {
         name: 'Controllers/ProductsController.cs',
-        desc: '<strong class="text-white">ProductsController.cs</strong> — The MVC controller. <code class="text-accent-300 bg-surface-800 px-1 py-0.5 rounded text-xs font-mono">IProductRepository</code> is injected via constructor DI. Every write action validates <code class="text-accent-300 bg-surface-800 px-1 py-0.5 rounded text-xs font-mono">ModelState</code> first. The <code class="text-accent-300 bg-surface-800 px-1 py-0.5 rounded text-xs font-mono">[ValidateAntiForgeryToken]</code> attribute prevents CSRF. Redirects use <code class="text-accent-300 bg-surface-800 px-1 py-0.5 rounded text-xs font-mono">nameof()</code> for refactor safety.',
+        desc: '<strong>ProductsController.cs</strong> — The MVC controller. <code class="inline-code">IProductRepository</code> is injected via constructor DI. Every write action validates <code class="inline-code">ModelState</code> first. The <code class="inline-code">[ValidateAntiForgeryToken]</code> attribute prevents CSRF. Redirects use <code class="inline-code">nameof()</code> for refactor safety.',
         code: `<span class="cm">// Controllers/ProductsController.cs</span>
 <span class="kw">using</span> System.Threading.Tasks;
 <span class="kw">using</span> Microsoft.AspNetCore.Mvc;
@@ -824,10 +1143,8 @@
         {
             <span class="kw">if</span> (id != product.Id) <span class="kw">return</span> <span class="fn">BadRequest</span>();
             <span class="kw">if</span> (!ModelState.IsValid) <span class="kw">return</span> <span class="fn">View</span>(product);
-
             <span class="kw">var</span> updated = <span class="kw">await</span> _repo.<span class="fn">UpdateAsync</span>(product);
             <span class="kw">if</span> (!updated) <span class="kw">return</span> <span class="fn">NotFound</span>();
-
             TempData[<span class="st">"Success"</span>] = <span class="st">$"'{product.Name}' updated successfully."</span>;
             <span class="kw">return</span> <span class="fn">RedirectToAction</span>(<span class="kw">nameof</span>(Index));
         }
@@ -854,7 +1171,7 @@
       },
       index: {
         name: 'Views/Products/Index.cshtml',
-        desc: '<strong class="text-white">Index.cshtml</strong> — Renders a Bootstrap-styled table of all products. Displays a TempData success alert when redirected from write actions. Each row has Details, Edit, and Delete action links generated with Tag Helpers.',
+        desc: '<strong>Index.cshtml</strong> — Renders a Bootstrap-styled table of all products. Displays a TempData success alert when redirected from write actions. Each row has Details, Edit, and Delete action links generated with Tag Helpers.',
         code: `<span class="cm">@* Views/Products/Index.cshtml *@</span>
 @model IEnumerable&lt;<span class="ty">ProductManager</span>.Models.<span class="ty">Product</span>&gt;
 
@@ -871,7 +1188,7 @@
 
 @<span class="kw">if</span> (TempData[<span class="st">"Success"</span>] != <span class="kw">null</span>)
 {
-    &lt;div class=<span class="st">"alert alert-success alert-dismissible fade show"</span> role=<span class="st">"alert"</span>&gt;
+    &lt;div class=<span class="st">"alert alert-success alert-dismissible fade show"</span>&gt;
         @TempData[<span class="st">"Success"</span>]
         &lt;button type=<span class="st">"button"</span> class=<span class="st">"btn-close"</span> data-bs-dismiss=<span class="st">"alert"</span>&gt;&lt;/button&gt;
     &lt;/div&gt;
@@ -914,7 +1231,7 @@
       },
       details: {
         name: 'Views/Products/Details.cshtml',
-        desc: '<strong class="text-white">Details.cshtml</strong> — Displays a single product using Bootstrap\'s definition list layout. Uses <code class="text-accent-300 bg-surface-800 px-1 py-0.5 rounded text-xs font-mono">@Html.DisplayNameFor</code> and <code class="text-accent-300 bg-surface-800 px-1 py-0.5 rounded text-xs font-mono">@Html.DisplayFor</code> to respect DataAnnotations like <code class="text-accent-300 bg-surface-800 px-1 py-0.5 rounded text-xs font-mono">[DataType.Currency]</code>.',
+        desc: '<strong>Details.cshtml</strong> — Displays a single product using Bootstrap\'s definition list layout. Uses <code class="inline-code">@Html.DisplayNameFor</code> and <code class="inline-code">@Html.DisplayFor</code> to respect DataAnnotations like <code class="inline-code">[DataType.Currency]</code>.',
         code: `<span class="cm">@* Views/Products/Details.cshtml *@</span>
 @model <span class="ty">ProductManager</span>.Models.<span class="ty">Product</span>
 
@@ -925,9 +1242,7 @@
 &lt;div class=<span class="st">"card shadow-sm"</span>&gt;
     &lt;div class=<span class="st">"card-header d-flex justify-content-between align-items-center"</span>&gt;
         &lt;h4 class=<span class="st">"mb-0"</span>&gt;@Model.Name&lt;/h4&gt;
-        &lt;span class=<span class="st">"badge bg-primary fs-6"</span>&gt;
-            @Model.Price.ToString(<span class="st">"C"</span>)
-        &lt;/span&gt;
+        &lt;span class=<span class="st">"badge bg-primary fs-6"</span>&gt;@Model.Price.ToString(<span class="st">"C"</span>)&lt;/span&gt;
     &lt;/div&gt;
     &lt;div class=<span class="st">"card-body"</span>&gt;
         &lt;dl class=<span class="st">"row"</span>&gt;
@@ -956,17 +1271,14 @@
         &lt;/dl&gt;
     &lt;/div&gt;
     &lt;div class=<span class="st">"card-footer d-flex gap-2"</span>&gt;
-        &lt;a asp-action=<span class="st">"Edit"</span> asp-route-id=<span class="st">"@Model.Id"</span>
-           class=<span class="st">"btn btn-warning"</span>&gt;Edit&lt;/a&gt;
-        &lt;a asp-action=<span class="st">"Index"</span> class=<span class="st">"btn btn-outline-secondary"</span>&gt;
-            Back to List
-        &lt;/a&gt;
+        &lt;a asp-action=<span class="st">"Edit"</span> asp-route-id=<span class="st">"@Model.Id"</span> class=<span class="st">"btn btn-warning"</span>&gt;Edit&lt;/a&gt;
+        &lt;a asp-action=<span class="st">"Index"</span> class=<span class="st">"btn btn-outline-secondary"</span>&gt;Back to List&lt;/a&gt;
     &lt;/div&gt;
 &lt;/div&gt;`
       },
       create: {
         name: 'Views/Products/Create.cshtml',
-        desc: '<strong class="text-white">Create.cshtml</strong> — Bootstrap 5 form with Tag Helpers (<code class="text-accent-300 bg-surface-800 px-1 py-0.5 rounded text-xs font-mono">asp-for</code>, <code class="text-accent-300 bg-surface-800 px-1 py-0.5 rounded text-xs font-mono">asp-validation-for</code>). Includes <code class="text-accent-300 bg-surface-800 px-1 py-0.5 rounded text-xs font-mono">@Html.AntiForgeryToken()</code> and jQuery Unobtrusive Validation for client-side validation before form submit.',
+        desc: '<strong>Create.cshtml</strong> — Bootstrap 5 form with Tag Helpers (<code class="inline-code">asp-for</code>, <code class="inline-code">asp-validation-for</code>). Includes <code class="inline-code">@Html.AntiForgeryToken()</code> and jQuery Unobtrusive Validation for client-side validation before form submit.',
         code: `<span class="cm">@* Views/Products/Create.cshtml *@</span>
 @model <span class="ty">ProductManager</span>.Models.<span class="ty">Product</span>
 
@@ -1005,8 +1317,7 @@
               &lt;label asp-for=<span class="st">"Price"</span> class=<span class="st">"form-label"</span>&gt;&lt;/label&gt;
               &lt;div class=<span class="st">"input-group"</span>&gt;
                 &lt;span class=<span class="st">"input-group-text"</span>&gt;$&lt;/span&gt;
-                &lt;input asp-for=<span class="st">"Price"</span> class=<span class="st">"form-control"</span> type=<span class="st">"number"</span>
-                       step=<span class="st">"0.01"</span> /&gt;
+                &lt;input asp-for=<span class="st">"Price"</span> class=<span class="st">"form-control"</span> type=<span class="st">"number"</span> step=<span class="st">"0.01"</span> /&gt;
               &lt;/div&gt;
               &lt;span asp-validation-for=<span class="st">"Price"</span> class=<span class="st">"text-danger"</span>&gt;&lt;/span&gt;
             &lt;/div&gt;
@@ -1024,9 +1335,7 @@
           &lt;/div&gt;
 
           &lt;div class=<span class="st">"d-flex gap-2"</span>&gt;
-            &lt;button type=<span class="st">"submit"</span> class=<span class="st">"btn btn-primary"</span>&gt;
-              &lt;i class=<span class="st">"bi bi-check-lg"</span>&gt;&lt;/i&gt; Create
-            &lt;/button&gt;
+            &lt;button type=<span class="st">"submit"</span> class=<span class="st">"btn btn-primary"</span>&gt;Create&lt;/button&gt;
             &lt;a asp-action=<span class="st">"Index"</span> class=<span class="st">"btn btn-outline-secondary"</span>&gt;Cancel&lt;/a&gt;
           &lt;/div&gt;
         &lt;/form&gt;
@@ -1041,7 +1350,7 @@
       },
       edit: {
         name: 'Views/Products/Edit.cshtml',
-        desc: '<strong class="text-white">Edit.cshtml</strong> — Pre-fills the form with existing data via model binding. Includes a hidden <code class="text-accent-300 bg-surface-800 px-1 py-0.5 rounded text-xs font-mono">asp-for="Id"</code> field so the controller receives the primary key for the update. Anti-forgery token protects the POST.',
+        desc: '<strong>Edit.cshtml</strong> — Pre-fills the form with existing data via model binding. Includes a hidden <code class="inline-code">asp-for="Id"</code> field so the controller receives the primary key for the update. Anti-forgery token protects the POST.',
         code: `<span class="cm">@* Views/Products/Edit.cshtml *@</span>
 @model <span class="ty">ProductManager</span>.Models.<span class="ty">Product</span>
 
@@ -1081,8 +1390,7 @@
               &lt;label asp-for=<span class="st">"Price"</span> class=<span class="st">"form-label"</span>&gt;&lt;/label&gt;
               &lt;div class=<span class="st">"input-group"</span>&gt;
                 &lt;span class=<span class="st">"input-group-text"</span>&gt;$&lt;/span&gt;
-                &lt;input asp-for=<span class="st">"Price"</span> class=<span class="st">"form-control"</span> type=<span class="st">"number"</span>
-                       step=<span class="st">"0.01"</span> /&gt;
+                &lt;input asp-for=<span class="st">"Price"</span> class=<span class="st">"form-control"</span> type=<span class="st">"number"</span> step=<span class="st">"0.01"</span> /&gt;
               &lt;/div&gt;
               &lt;span asp-validation-for=<span class="st">"Price"</span> class=<span class="st">"text-danger"</span>&gt;&lt;/span&gt;
             &lt;/div&gt;
@@ -1100,9 +1408,7 @@
           &lt;/div&gt;
 
           &lt;div class=<span class="st">"d-flex gap-2"</span>&gt;
-            &lt;button type=<span class="st">"submit"</span> class=<span class="st">"btn btn-warning"</span>&gt;
-              &lt;i class=<span class="st">"bi bi-floppy"</span>&gt;&lt;/i&gt; Save Changes
-            &lt;/button&gt;
+            &lt;button type=<span class="st">"submit"</span> class=<span class="st">"btn btn-warning"</span>&gt;Save Changes&lt;/button&gt;
             &lt;a asp-action=<span class="st">"Index"</span> class=<span class="st">"btn btn-outline-secondary"</span>&gt;Cancel&lt;/a&gt;
           &lt;/div&gt;
         &lt;/form&gt;
@@ -1117,7 +1423,7 @@
       },
       delete: {
         name: 'Views/Products/Delete.cshtml',
-        desc: '<strong class="text-white">Delete.cshtml</strong> — Shows product details as confirmation before a destructive action. The actual delete is triggered by a POST form (not a GET link) to prevent CSRF and accidental deletion via link crawling.',
+        desc: '<strong>Delete.cshtml</strong> — Shows product details as confirmation before a destructive action. The actual delete is triggered by a POST form (not a GET link) to prevent CSRF and accidental deletion via link crawling.',
         code: `<span class="cm">@* Views/Products/Delete.cshtml *@</span>
 @model <span class="ty">ProductManager</span>.Models.<span class="ty">Product</span>
 
@@ -1166,7 +1472,7 @@
       },
       program: {
         name: 'Program.cs',
-        desc: '<strong class="text-white">Program.cs</strong> — The .NET 8 minimal hosting entry point. Registers EF Core with SQL Server, adds the repository as a scoped service (one per request), configures the MVC pipeline with exception handling, HTTPS redirection, static files, auth middleware, and sets the default route to <code class="text-accent-300 bg-surface-800 px-1 py-0.5 rounded text-xs font-mono">Products/Index</code>.',
+        desc: '<strong>Program.cs</strong> — The .NET 8 minimal hosting entry point. Registers EF Core with SQL Server, adds the repository as a scoped service (one per request), configures the MVC pipeline with exception handling, HTTPS redirection, static files, auth middleware, and sets the default route to <code class="inline-code">Products/Index</code>.',
         code: `<span class="cm">// Program.cs — .NET 8 Minimal Hosting Model</span>
 <span class="kw">using</span> Microsoft.EntityFrameworkCore;
 <span class="kw">using</span> <span class="ty">ProductManager</span>.Data;
@@ -1174,12 +1480,9 @@
 
 <span class="kw">var</span> builder = WebApplication.<span class="fn">CreateBuilder</span>(args);
 
-<span class="cm">// ── Services ─────────────────────────────────────────────────
-// MVC with Razor Views</span>
+<span class="cm">// ── Services ─────────────────────────────────────────────────</span>
 builder.Services.<span class="fn">AddControllersWithViews</span>();
 
-<span class="cm">// EF Core — SQL Server
-// Connection string in appsettings.json: "DefaultConnection"</span>
 builder.Services.<span class="fn">AddDbContext</span>&lt;<span class="ty">AppDbContext</span>&gt;(options =&gt;
     options.<span class="fn">UseSqlServer</span>(
         builder.Configuration.<span class="fn">GetConnectionString</span>(<span class="st">"DefaultConnection"</span>)));
@@ -1187,17 +1490,12 @@ builder.Services.<span class="fn">AddDbContext</span>&lt;<span class="ty">AppDbC
 <span class="cm">// Repository — Scoped: new instance per HTTP request</span>
 builder.Services.<span class="fn">AddScoped</span>&lt;<span class="ty">IProductRepository</span>, <span class="ty">ProductRepository</span>&gt;();
 
-<span class="cm">// Optional: distributed cache for TempData in load-balanced scenarios
-// builder.Services.AddStackExchangeRedisCache(...);</span>
-
 <span class="kw">var</span> app = builder.<span class="fn">Build</span>();
 
 <span class="cm">// ── Middleware Pipeline ───────────────────────────────────────</span>
 <span class="kw">if</span> (!app.Environment.<span class="fn">IsDevelopment</span>())
 {
-    <span class="cm">// Production error page — maps exceptions to /Home/Error</span>
     app.<span class="fn">UseExceptionHandler</span>(<span class="st">"/Home/Error"</span>);
-    <span class="cm">// HTTP Strict Transport Security</span>
     app.<span class="fn">UseHsts</span>();
 }
 <span class="kw">else</span>
@@ -1205,19 +1503,18 @@ builder.Services.<span class="fn">AddScoped</span>&lt;<span class="ty">IProductR
     app.<span class="fn">UseDeveloperExceptionPage</span>();
 }
 
-app.<span class="fn">UseHttpsRedirection</span>();       <span class="cm">// Redirect HTTP → HTTPS</span>
-app.<span class="fn">UseStaticFiles</span>();            <span class="cm">// Serve wwwroot (Bootstrap, JS)</span>
+app.<span class="fn">UseHttpsRedirection</span>();
+app.<span class="fn">UseStaticFiles</span>();
 app.<span class="fn">UseRouting</span>();
-
-app.<span class="fn">UseAuthentication</span>();         <span class="cm">// Identity (if added)</span>
-app.<span class="fn">UseAuthorization</span>();          <span class="cm">// [Authorize] attribute support</span>
+app.<span class="fn">UseAuthentication</span>();
+app.<span class="fn">UseAuthorization</span>();
 
 <span class="cm">// Default route: /Products (not Home/Index)</span>
 app.<span class="fn">MapControllerRoute</span>(
     name: <span class="st">"default"</span>,
     pattern: <span class="st">"{controller=Products}/{action=Index}/{id?}"</span>);
 
-<span class="cm">// Apply pending EF Core migrations on startup (dev convenience)</span>
+<span class="cm">// Apply pending EF Core migrations on startup</span>
 <span class="kw">using</span> (<span class="kw">var</span> scope = app.Services.<span class="fn">CreateScope</span>())
 {
     <span class="kw">var</span> db = scope.ServiceProvider
@@ -1229,7 +1526,7 @@ app.<span class="fn">Run</span>();`
       }
     };
 
-    // ─── LIVE DEMO DATA (localStorage) ────────────────────────────────────────
+    // ─── LIVE DEMO DATA ────────────────────────────────────────────────────────
     const STORAGE_KEY = 'dotnet_products';
     let products = [];
     let nextId = 1;
@@ -1279,28 +1576,28 @@ app.<span class="fn">Run</span>();`
       } else {
         noRes.classList.add('hidden');
         tbody.innerHTML = filtered.map(p => `
-          <tr class="demo-row border-b border-border">
-            <td class="px-4 py-3 text-muted font-mono text-xs">${p.Id}</td>
-            <td class="px-4 py-3 text-white font-medium text-sm">${esc(p.Name)}</td>
+          <tr class="demo-row table-row-sep">
+            <td class="px-4 py-3 font-mono text-xs" style="color:var(--text-muted);">${p.Id}</td>
+            <td class="px-4 py-3 font-medium text-sm" style="color:var(--text-white);">${esc(p.Name)}</td>
             <td class="px-4 py-3">
-              <span class="badge" style="background:#1a1a2e;color:#a5b4fc;border:1px solid #252540;">${esc(p.Category || '—')}</span>
+              <span class="badge" style="background:var(--badge-bg);color:var(--accent-400);border:1px solid var(--badge-border);">${esc(p.Category || '—')}</span>
             </td>
-            <td class="px-4 py-3 text-right text-white font-mono text-sm">$${(+p.Price).toFixed(2)}</td>
+            <td class="px-4 py-3 text-right font-mono text-sm" style="color:var(--text-white);">$${(+p.Price).toFixed(2)}</td>
             <td class="px-4 py-3">
-              <span class="text-sm font-mono ${p.Stock > 100 ? 'text-green-400' : p.Stock > 10 ? 'text-yellow-400' : 'text-red-400'}">${p.Stock}</span>
+              <span class="text-sm font-mono ${p.Stock > 100 ? 'text-green-500' : p.Stock > 10 ? 'text-yellow-500' : 'text-red-500'}">${p.Stock}</span>
             </td>
-            <td class="px-4 py-3 text-muted text-xs font-mono">${p.CreatedDate}</td>
+            <td class="px-4 py-3 font-mono text-xs" style="color:var(--text-muted);">${p.CreatedDate}</td>
             <td class="px-4 py-3">
               <div class="flex gap-1.5">
-                <button onclick="showDetails(${p.Id})" class="px-2.5 py-1 rounded text-xs border border-border text-slate-300 hover:border-accent-500 hover:text-accent-300 transition-all font-mono">Details</button>
-                <button onclick="showEdit(${p.Id})" class="px-2.5 py-1 rounded text-xs border border-border text-yellow-300 hover:border-yellow-500 transition-all font-mono">Edit</button>
-                <button onclick="showDeleteConfirm(${p.Id})" class="px-2.5 py-1 rounded text-xs border border-red-900 text-red-400 hover:border-red-600 transition-all font-mono">Delete</button>
+                <button onclick="showDetails(${p.Id})" class="px-2.5 py-1 rounded text-xs font-mono transition-colors" style="border:1px solid var(--border);color:var(--text-secondary);" onmouseover="this.style.borderColor='var(--accent-500)';this.style.color='var(--accent-300)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-secondary)'">Details</button>
+                <button onclick="showEdit(${p.Id})" class="px-2.5 py-1 rounded text-xs font-mono transition-colors" style="border:1px solid var(--border);color:#eab308;" onmouseover="this.style.borderColor='#eab308'" onmouseout="this.style.borderColor='var(--border)'">Edit</button>
+                <button onclick="showDeleteConfirm(${p.Id})" class="px-2.5 py-1 rounded text-xs font-mono transition-colors" style="border:1px solid #7f1d1d;color:#f87171;" onmouseover="this.style.borderColor='#ef4444'" onmouseout="this.style.borderColor='#7f1d1d'">Delete</button>
               </div>
             </td>
           </tr>
         `).join('');
       }
-      if (stats) stats.innerHTML = `<span class="text-accent-400 font-mono">${filtered.length}</span> product${filtered.length !== 1 ? 's' : ''} — data persisted via <code class="text-accent-300">localStorage</code> (simulating EF Core)`;
+      if (stats) stats.innerHTML = `<span style="color:var(--accent-400);" class="font-mono">${filtered.length}</span> product${filtered.length !== 1 ? 's' : ''} — data persisted via <code class="inline-code">localStorage</code> (simulating EF Core)`;
     };
 
     function esc(s) {
@@ -1319,13 +1616,13 @@ app.<span class="fn">Run</span>();`
       if (!p) return;
       document.getElementById('detailsContent').innerHTML = `
         <div class="grid grid-cols-2 gap-3 p-5">
-          <div><p class="text-xs text-muted font-mono mb-0.5">Id</p><p class="text-white font-mono text-sm">${p.Id}</p></div>
-          <div><p class="text-xs text-muted font-mono mb-0.5">Name</p><p class="text-white font-semibold">${esc(p.Name)}</p></div>
-          <div><p class="text-xs text-muted font-mono mb-0.5">Category</p><p class="text-accent-300">${esc(p.Category || '—')}</p></div>
-          <div><p class="text-xs text-muted font-mono mb-0.5">Price</p><p class="text-green-400 font-mono font-semibold">$${(+p.Price).toFixed(2)}</p></div>
-          <div><p class="text-xs text-muted font-mono mb-0.5">Stock</p><p class="text-white font-mono">${p.Stock}</p></div>
-          <div><p class="text-xs text-muted font-mono mb-0.5">Created</p><p class="text-muted text-sm font-mono">${p.CreatedDate}</p></div>
-          <div class="col-span-2"><p class="text-xs text-muted font-mono mb-0.5">Description</p><p class="text-slate-300 text-sm">${esc(p.Description || '—')}</p></div>
+          <div><p class="text-xs font-mono mb-0.5" style="color:var(--text-muted);">Id</p><p class="font-mono text-sm" style="color:var(--text-white);">${p.Id}</p></div>
+          <div><p class="text-xs font-mono mb-0.5" style="color:var(--text-muted);">Name</p><p class="font-semibold" style="color:var(--text-white);">${esc(p.Name)}</p></div>
+          <div><p class="text-xs font-mono mb-0.5" style="color:var(--text-muted);">Category</p><p style="color:var(--accent-300);">${esc(p.Category || '—')}</p></div>
+          <div><p class="text-xs font-mono mb-0.5" style="color:var(--text-muted);">Price</p><p class="font-mono font-semibold text-green-500">$${(+p.Price).toFixed(2)}</p></div>
+          <div><p class="text-xs font-mono mb-0.5" style="color:var(--text-muted);">Stock</p><p class="font-mono" style="color:var(--text-white);">${p.Stock}</p></div>
+          <div><p class="text-xs font-mono mb-0.5" style="color:var(--text-muted);">Created</p><p class="text-sm font-mono" style="color:var(--text-muted);">${p.CreatedDate}</p></div>
+          <div class="col-span-2"><p class="text-xs font-mono mb-0.5" style="color:var(--text-muted);">Description</p><p class="text-sm" style="color:var(--text-secondary);">${esc(p.Description || '—')}</p></div>
         </div>`;
       document.getElementById('detailsEditBtn').onclick = () => showEdit(id);
       showView('details');
@@ -1349,10 +1646,10 @@ app.<span class="fn">Run</span>();`
       currentDeleteId = id;
       document.getElementById('deleteContent').innerHTML = `
         <div class="grid grid-cols-2 gap-3">
-          <div><p class="text-xs text-muted font-mono mb-0.5">Name</p><p class="text-white font-semibold">${esc(p.Name)}</p></div>
-          <div><p class="text-xs text-muted font-mono mb-0.5">Price</p><p class="text-green-400 font-mono">$${(+p.Price).toFixed(2)}</p></div>
-          <div><p class="text-xs text-muted font-mono mb-0.5">Category</p><p class="text-accent-300">${esc(p.Category || '—')}</p></div>
-          <div><p class="text-xs text-muted font-mono mb-0.5">Stock</p><p class="text-white font-mono">${p.Stock}</p></div>
+          <div><p class="text-xs font-mono mb-0.5" style="color:var(--text-muted);">Name</p><p class="font-semibold" style="color:var(--text-white);">${esc(p.Name)}</p></div>
+          <div><p class="text-xs font-mono mb-0.5" style="color:var(--text-muted);">Price</p><p class="font-mono text-green-500">$${(+p.Price).toFixed(2)}</p></div>
+          <div><p class="text-xs font-mono mb-0.5" style="color:var(--text-muted);">Category</p><p style="color:var(--accent-300);">${esc(p.Category || '—')}</p></div>
+          <div><p class="text-xs font-mono mb-0.5" style="color:var(--text-muted);">Stock</p><p class="font-mono" style="color:var(--text-white);">${p.Stock}</p></div>
         </div>`;
       document.getElementById('confirmDeleteBtn').onclick = () => {
         products = products.filter(x => x.Id !== currentDeleteId);
@@ -1364,11 +1661,10 @@ app.<span class="fn">Run</span>();`
       showView('delete');
     };
 
-    // Create submit
     window.submitCreate = function (e) {
       e.preventDefault();
       const fd = new FormData(e.target);
-      const newProduct = {
+      const p = {
         Id: nextId++,
         Name: fd.get('Name'),
         Category: fd.get('Category'),
@@ -1377,15 +1673,14 @@ app.<span class="fn">Run</span>();`
         Description: fd.get('Description'),
         CreatedDate: new Date().toISOString().split('T')[0],
       };
-      products.push(newProduct);
+      products.push(p);
       saveData();
       e.target.reset();
-      showToast(`'${newProduct.Name}' created successfully.`, 'check', '#50fa7b');
+      showToast(`'${p.Name}' created successfully.`, 'check', '#50fa7b');
       showView('index');
       renderTable();
     };
 
-    // Edit submit
     window.submitEdit = function (e) {
       e.preventDefault();
       const fd = new FormData(e.target);
@@ -1422,31 +1717,21 @@ app.<span class="fn">Run</span>();`
     window.selectFile = function (key) {
       const file = files[key];
       if (!file) return;
-
-      // Update sidebar selection
       document.querySelectorAll('.file-item').forEach(el => {
-        el.classList.toggle('selected', el.dataset.file === key);
-        el.classList.toggle('text-white', el.dataset.file === key);
-        el.classList.toggle('text-slate-300', el.dataset.file !== key);
+        const isSelected = el.dataset.file === key;
+        el.classList.toggle('selected', isSelected);
       });
-
-      // Update mobile picker
       const mp = document.getElementById('mobileFilePicker');
       if (mp) mp.value = key;
-
-      // Update code panel
       document.getElementById('codeFileName').textContent = file.name;
       document.getElementById('codeContent').innerHTML = file.code;
       document.getElementById('fileDesc').innerHTML = file.desc;
-
-      // Animate
       const panel = document.getElementById('codePanel');
       panel.classList.remove('fade-in');
       void panel.offsetWidth;
       panel.classList.add('fade-in');
     };
 
-    // Copy
     window.copyCode = function () {
       const pre = document.getElementById('codeContent');
       navigator.clipboard.writeText(pre.innerText).then(() => {
@@ -1462,6 +1747,7 @@ app.<span class="fn">Run</span>();`
     renderTable();
   });
   </script>
+<script>window.onload=function(){var d=document.createElement("div");d.id="appLoadFinished";document.body.appendChild(d);};</script>
+</body>
 
-
-</body></html>
+</html>
